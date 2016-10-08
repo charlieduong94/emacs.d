@@ -34,6 +34,8 @@
                           'beacon
                           'minimap
                           'ace-jump-mode
+                          'editorconfig
+                          'material-theme
                           'helm)
 
 ;; Activate installed packages
@@ -78,8 +80,18 @@
          ("node_modules" "bower_components" ".git" "dist" "static"))
         (files ("*.gz" "*.zip" "*.jpg" "*.gif" ".pdf" ".png" "*.woff" "*.svg" ".tff" "*.eot"))))
 
+;; enable copy paste
+(setq x-select-enable-clipboard nil)
+
+;; set font to 10pt
+(set-face-attribute 'default nil :height 100)
+
 ;; enable twitter mode
 (require 'twittering-mode)
+
+;; enable editorconfig
+(require 'editorconfig)
+(editorconfig-mode 1)
 
 ;; enable evil magit 
 (require 'evil-magit)
