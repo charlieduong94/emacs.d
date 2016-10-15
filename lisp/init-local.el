@@ -72,8 +72,21 @@
 (global-set-key (kbd "C-x p") 'fiplr-find-file)
 
 ;; add ace-jump-mode key combos
-(global-set-key (kbd "C-c SPC") 'ace-jump-mode)
-(global-set-key (kbd "C-c C-c SPC") 'ace-jump-char-mode)
+;;(global-set-key (kbd "C-x SPC") 'ace-jump-mode)
+;;(global-set-key (kbd "C-x C-x SPC") 'ace-jump-char-mode)
+
+;; emulate vim with escaping via
+(defun my-esc (prompt)
+  "Functionality for escaping generally.  Includes exiting Evil insert state and C-g binding. "
+  (cond
+   ;; If we're in one of the Evil states that defines [escape] key, return [escape] so as
+   ;; Key Lookup will use it.
+   ((or (evil-insert-state-p) (evil-normal-state-p) (evil-replace-state-p) (evil-visual-state-p)) (kbd "C-q"))
+   (t (kbd "C-g"))))
+
+(define-key key-translation-map (kbd "C-c") `my-esc)
+;;(define-key evil-operator-state-map (kbd "C-c") 'keyboard-quit)
+;;(set-quit-char "C-c")
 ;; ignore certain directories
 (setq fiplr-ignored-globs
       '((directories
